@@ -1,0 +1,22 @@
+{
+  "name": "nodejs_challenge",
+  "version": "1.0.0",
+  "description": "this is my first node app ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/malzak/node-js-challenge.git"
+  },
+  "author": "malek bouani",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/malzak/node-js-challenge/issues"
+  },
+  "homepage": "https://github.com/malzak/node-js-challenge#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
