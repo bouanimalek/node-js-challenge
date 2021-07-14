@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 const connect  = require('./database/connect'); 
 // require Models
 const User = require('./models/userSchema');
+const Todo = require('./models/todoSchema');
 const app = express();
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -44,6 +45,38 @@ app.put('/users/:id', async(req, res) => {
 app.delete('/users/:id', async(req, res) => {
     const deletedUser = await User.findByIdAndDelete(req.params.id);
     res.json({message: 'user deleted successfully'});
+})
+
+// partie TODO
+
+// get all todo
+app.get('/todos', async(req, res) => {
+    const todos = await  Todo.find({});
+    res.json(todos);
+})
+
+// get todo by id
+app.get('/todos/:idTodo', async(req, res) => {
+    const todo = await Todo.findById(req.params.idTodo);
+    res.json(todo);
+})
+
+// add todo
+app.post('/todos', async(req, res) => {
+    const newTodo = await Todo.create(req.body);
+    res.json(newTodo);
+})
+
+// modify todo by id
+app.put('/todos/:idTodo', async(req, res) => {
+    const updatedTodo = await Todo.findByIdAndUpdate(req.params.idTodo, req.body, {new: true});
+    res.json(updatedTodo);
+})
+
+// delete todo
+app.delete('/todos/:idTodo', async(req, res) => {
+    const deletedTodo = await Todo.findByIdAndDelete(req.params.idTodo);
+    res.json({message: 'todo deleted sucessfully'});
 })
 
 app.listen(port, () => {
