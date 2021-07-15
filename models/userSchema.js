@@ -6,7 +6,8 @@ const userSchema = new Schema({
   lastname: String,
   email:   String,
   password: String,
-  age: {type: Number, default: 10}
+  age: {type: Number, default: 10},
+  todos: [{ type: Schema.Types.ObjectId, ref: 'Todos'}]
 });
 
 const User = mongoose.model('Users', userSchema);

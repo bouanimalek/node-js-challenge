@@ -32,4 +32,19 @@ router.delete('/users/:id', async(req, res) => {
     res.json({message: 'user deleted successfully'});
 })
 
+// Affect todo
+router.put('/users/affect/:idUser/:idTodo', async(req, res) => {
+    const updateUserTodo = await User.findByIdAndUpdate(req.params.idUser, {$push: {todos: req.params.idTodo}}, {new: true});
+    res.json(updateUserTodo);
+})
+// DesAffect todo
+router.put('/users/desAffect/:idUser/:idTodo', async(req, res) => {
+    const updateUserTodo = await User.findByIdAndUpdate(req.params.idUser, {$pull: {todos: req.params.idTodo}}, {new: true});
+    res.json(updateUserTodo);
+})
+// GetAllUsers with all todos
+router.get('/usersWithTodos', async(req, res) => {
+    const usersWithTodos = await User.find({}).populate({path: 'todos', select: 'name description -_id'});
+    res.json(usersWithTodos);
+})
 module.exports = router;
