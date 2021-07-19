@@ -17,7 +17,9 @@
   },
   "homepage": "https://github.com/malzak/node-js-challenge#readme",
   "dependencies": {
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
-    "mongoose": "^5.13.2"
+    "mongoose": "^5.13.2",
+    "nodemailer": "^6.6.3"
   }
 }
