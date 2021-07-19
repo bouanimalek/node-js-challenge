@@ -19,11 +19,17 @@ const todoApi = require('./routes/todoApi');
 const customerApi = require('./routes/customerApi');
 const identifierApi = require('./routes/identifierApi');
 
+const tutorialApi = require('./routes/tutorialApi');
+const tagApi = require('./routes/tagApi');
+
 app.use('', userApi);
 app.use('', todoApi);
 
 app.use('', customerApi);
 app.use('', identifierApi);
+
+app.use('', tutorialApi);
+app.use('', tagApi);
 
 app.listen(port, () => {
   console.log(`Application listening at http://localhost:${port}`)
