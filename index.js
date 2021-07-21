@@ -22,8 +22,11 @@ const identifierApi = require('./routes/identifierApi');
 const tutorialApi = require('./routes/tutorialApi');
 const tagApi = require('./routes/tagApi');
 
-//mailer 
-const nodeMailer = require('./routes/nodemailerApi');
+// mailer 
+const nodeMailerApi = require('./routes/nodemailerApi');
+
+// multer
+const multerApi = require('./routes/multerApi');
 
 app.use('', userApi);
 app.use('', todoApi);
@@ -34,8 +37,9 @@ app.use('', identifierApi);
 app.use('', tutorialApi);
 app.use('', tagApi);
 
-app.use('', nodeMailer);
+app.use('', nodeMailerApi);
 
+app.use('', multerApi);
 
 app.listen(port, () => {
   console.log(`Application listening at http://localhost:${port}`)
