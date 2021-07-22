@@ -28,6 +28,9 @@ const nodeMailerApi = require('./routes/nodemailerApi');
 // multer
 const multerApi = require('./routes/multerApi');
 
+// node-cron
+const nodeCronApi = require('./routes/nodeCronApi');
+
 app.use('', userApi);
 app.use('', todoApi);
 
@@ -40,6 +43,8 @@ app.use('', tagApi);
 app.use('', nodeMailerApi);
 
 app.use('', multerApi);
+
+app.use('', nodeCronApi);
 
 app.listen(port, () => {
   console.log(`Application listening at http://localhost:${port}`)
