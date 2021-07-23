@@ -1,3 +1,4 @@
+const morgan = require('morgan');
 const express = require('express');
 const bodyParser = require('body-parser')
 // connect to database 
@@ -8,6 +9,9 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 const port = 3000
+
+// morgan config
+app.use(morgan('dev'));
 
 app.get('/', (req, res) => {
   res.json({message : 'Welcome back!'})
