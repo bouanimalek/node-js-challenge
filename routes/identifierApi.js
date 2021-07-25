@@ -40,7 +40,7 @@ router.put('/identifiers/affect/:idIdentifier/:idCustomer', async(req, res) => {
 })
 
 // DesAffect customer
-router.put('/identifers/desAffect/:idIdentifier/:idCustomer', async(req, res) => {
+router.put('/identifiers/desAffect/:idIdentifier', async(req, res) => {
     const updatedIdentiferCustomer = await Identifier.findByIdAndUpdate(req.params.idIdentifier, {customer: null}, {new: true});
     res.json(updatedIdentiferCustomer);
 })

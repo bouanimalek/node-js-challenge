@@ -16,15 +16,18 @@ function fileFilterFunction(req, file, cb) {
   //console.log(file);
   const extension = path.extname(file.originalname);
   // console.log(extension);
-  if (extension === ".png" || extension === ".jpg" || extension === ".jpeg") {
+  const allowedExtensions = ['.png', '.jpg', '.jpeg'];
+  if (allowedExtensions.includes(extension)) {
     cb(null, true);
   } else {
-    cb(null, false);
-    cb(new Error("it is not a valide extension!"));
+    cb(new Error('max files') , false);
   }
+ // cb(null, allowedExtensions.includes(extension));
 }
+const maxSize = 1 * 1024 * 1024;
 const upload = multer({
   storage: fileStorageEngine,
+  limits: {fileSize: maxSize, files: 3},
   fileFilter: fileFilterFunction,
 });
 
@@ -36,6 +39,23 @@ router.post("/single", upload.single("image"), (req, res) => {
   } else {
     res.status(400).json({ message: "file did not upload" });
   }
+});
+
+const upload2 = upload.single('image');
+// send single file V2
+router.post("/singleV2", (req, res) => {
+  //console.log(req.file);
+  upload2(req, res, (err)=>{
+   if(err instanceof multer.MulterError){
+     console.log(err);
+     res.status(400).json({ message: "file did not upload" });
+   }else if(err){
+    res.status(400).json({ message: "erreur" });
+   }else{
+    res.json({ message: "file uploaded succuessfully" });
+   }
+   
+  })
 });
 
 // send multiple files
