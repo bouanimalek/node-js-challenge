@@ -1,5 +1,6 @@
 const morgan = require('morgan');
 const express = require('express');
+const passport = require('./passport/passport');
 const bodyParser = require('body-parser')
 // connect to database 
 const connect  = require('./database/connect'); 

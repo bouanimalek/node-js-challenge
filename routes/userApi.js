@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/userSchema');
+const passport = require('passport');
 
 // get all users
 router.get('/users', async(req, res) => {
@@ -47,4 +48,12 @@ router.get('/usersWithTodos', async(req, res) => {
     const usersWithTodos = await User.find({}).populate({path: 'todos', select: 'name description -_id'});
     res.json(usersWithTodos);
 })
+
+// passport
+router.get('/profile', 
+  passport.authenticate('bearer', { session: false }),
+  function(req, res) {
+    res.json(req.user);
+  });
+
 module.exports = router;
