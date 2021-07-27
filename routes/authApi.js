@@ -10,7 +10,17 @@ router.get("/profile", passport.authenticate("bearer", { session: false }), (req
 });
 
 // create registerApi(check if email is already used)
-
+router.post('/register', async(req, res) => {
+  const userVerify = await User.findOne({
+    email: req.body.email
+  });
+  if(userVerify){
+    res.status(400).json({message: 'Failed! Email already in use!'});
+  } else {
+    const newUser = await User.create(req.body);
+    res.status(201).json({message: 'User created successfully', user: newUser});
+  }
+})
 
 // login with jwt
 router.post("/login", async (req, res) => {
