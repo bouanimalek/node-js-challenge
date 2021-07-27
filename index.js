@@ -1,6 +1,6 @@
 const morgan = require('morgan');
 const express = require('express');
-const passport = require('./passport/passport');
+const bearerStrategy = require('./passport/bearerStrategy');
 const bodyParser = require('body-parser')
 // connect to database 
 const connect  = require('./database/connect'); 
@@ -36,6 +36,9 @@ const multerApi = require('./routes/multerApi');
 // node-cron
 const nodeCronApi = require('./routes/nodeCronApi');
 
+// authApi(jwt, passport, passport-http-bearer)
+const authApi = require('./routes/authApi');
+
 app.use('', userApi);
 app.use('', todoApi);
 
@@ -50,6 +53,8 @@ app.use('', nodeMailerApi);
 app.use('', multerApi);
 
 app.use('', nodeCronApi);
+
+app.use('', authApi);
 
 app.listen(port, () => {
   console.log(`Application listening at http://localhost:${port}`)
