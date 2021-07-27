@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/userSchema');
 const passport = require('passport');
+const jwt = require('jsonwebtoken');
 
 // get all users
 router.get('/users', async(req, res) => {
@@ -55,5 +56,43 @@ router.get('/profile',
   function(req, res) {
     res.json(req.user);
   });
+
+  // login with jwt
+  router.get('/login/:id', async(req, res) => {
+    //   const user = {
+    //       id: 3,
+    //       name: "malzak",
+    //       email: "malzovich@gmail.com"
+    //   };
+      const userDb = await User.findById(req.params.id);
+     jwt.sign({user: userDb}, 'secretkey', (err, token) => {
+         res.json({token: token});
+     })
+  })
+
+ 
+
+  // api verify token
+  router.post('/verifyToken', verifyToken, (req, res) => {
+      jwt.verify(req.token, 'secretkey', (err, authData) => {
+          if(err){
+              res.status(403);
+          }else{
+            res.json({message: 'success', authData});
+          }
+      })
+    
+  });
+
+  function verifyToken(req, res, next){
+    const bearerHeader = req.headers['authorization'];
+    if(typeof bearerHeader !== "undefined"){
+        const bearerToken = bearerHeader.split(" ")[1];
+        req.token = bearerToken;
+        next();
+    }else{
+        res.status(403); //forbiden
+    }
+};
 
 module.exports = router;
