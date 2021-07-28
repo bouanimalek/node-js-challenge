@@ -39,6 +39,9 @@ const nodeCronApi = require('./routes/nodeCronApi');
 // authApi(jwt, passport, passport-http-bearer)
 const authApi = require('./routes/authApi');
 
+// authV2Api(hash pwd)
+const authV2Api = require('./routes/authV2Api');
+
 app.use('', userApi);
 app.use('', todoApi);
 
@@ -55,6 +58,8 @@ app.use('', multerApi);
 app.use('', nodeCronApi);
 
 app.use('', authApi);
+
+app.use('', authV2Api);
 
 app.listen(port, () => {
   console.log(`Application listening at http://localhost:${port}`)

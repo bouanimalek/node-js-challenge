@@ -20,7 +20,7 @@ router.post('/register', async(req, res) => {
     const newUser = await User.create(req.body);
     res.status(201).json({message: 'User created successfully', user: newUser});
   }
-})
+});
 
 // login with jwt
 router.post("/login", async (req, res) => {
